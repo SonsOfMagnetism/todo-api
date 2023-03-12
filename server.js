@@ -46,11 +46,22 @@ app.get("/todo", async (req, res) => {
 // Create
 app.post("/todo", async (req, res) => {
     try {
-      res.json(await Todo.create(req.body));
+      res.json(await Todo.create(req.body))
     } catch (error) {
-      res.status(400).json(error);
+      res.status(400).json(error)
     }
-});
+})
+
+// Update
+app.put("/todo/:id", async(req, res) => {
+    try {
+        res.json(
+            await Todo.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        )
+    } catch (error) {
+        res.send(400).json(error)
+    }
+})
 
 // Listener
 app.listen(PORT, () => console.log(`You are now on Port ${PORT}`))
