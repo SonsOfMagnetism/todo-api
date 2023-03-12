@@ -34,5 +34,23 @@ app.get("/", (req,res) => {
     res.send("hello world")
 })
 
+// Index
+app.get("/todo", async (req, res) => {
+    try {
+        res.json(await Todo.find({}))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
+// Create
+app.post("/todo", async (req, res) => {
+    try {
+      res.json(await Todo.create(req.body));
+    } catch (error) {
+      res.status(400).json(error);
+    }
+});
+
 // Listener
 app.listen(PORT, () => console.log(`You are now on Port ${PORT}`))
