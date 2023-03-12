@@ -63,5 +63,14 @@ app.put("/todo/:id", async(req, res) => {
     }
 })
 
+// Delete
+app.delete("/todo/:id", async(req, res) => {
+    try {
+        res.json(await Todo.findByIdAndRemove(req.params.id))
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 // Listener
 app.listen(PORT, () => console.log(`You are now on Port ${PORT}`))
